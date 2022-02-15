@@ -3,10 +3,12 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { tab2Page } from './tab2.page';
+import { searchPage } from './search.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
-import { tab2PageRoutingModule } from './tab2-routing.module';
+
+import { searchPageRoutingModule } from './search-routing.module';
 
 @NgModule({
   imports: [
@@ -14,8 +16,9 @@ import { tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    tab2PageRoutingModule
+    searchPageRoutingModule, 
+    Ng2SearchPipeModule
   ],
-  declarations: [tab2Page]
+  declarations: [searchPage]
 })
-export class tab2PageModule {}
+export class searchPageModule {}
