@@ -39,7 +39,7 @@ export class RestaurantService {
   }
 
   findRestaurantFromFragment(fragment: string) {
-for (let restaurant of this.allRestaurants) {
+  for (let restaurant of this.allRestaurants) {
       if (restaurant.fragment == fragment) {
         return restaurant;
       }

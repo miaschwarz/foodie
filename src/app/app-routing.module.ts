@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'reviews/:fragment',
     loadChildren: () => import('./reviews/reviews.module').then( m => m.reviewsPageModule)
   },
+  {
+    path: 'info-page',
+    loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
+  },
+  {
+    path: 'info-page/:fragment',
+    loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
+  },
 ];
 @NgModule({
   imports: [

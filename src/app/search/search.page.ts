@@ -16,7 +16,7 @@ export class searchPage {
 
   navTo(restaurant: any) {
     console.log(restaurant.fragment);
-    this.router.navigateByUrl(`reviews/${restaurant.fragment}`);
+    this.router.navigateByUrl(`info-page/${restaurant.fragment}`);
   }
 
 }

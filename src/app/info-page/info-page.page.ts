@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../services/restaurants.service';
 
-
 @Component({
-  selector: 'app-reviews',
-  templateUrl: './reviews.page.html',
-  styleUrls: ['./reviews.page.scss'],
+  selector: 'app-info-page',
+  templateUrl: './info-page.page.html',
+  styleUrls: ['./info-page.page.scss'],
 })
-export class reviewsPage implements OnInit {
+export class InfoPagePage implements OnInit {
 
   restaurant: any;
 
@@ -19,8 +18,9 @@ export class reviewsPage implements OnInit {
     this.restaurant = this.restaurantService.findRestaurantFromFragment(fragment);
   }
 
-  goBack() {
-    this.router.navigateByUrl(`tabs/search`);
+  goToReview(restaurant: any) {
+    console.log(restaurant.fragment);
+    this.router.navigateByUrl(`reviews/${restaurant.fragment}`);
   }
 
 }
