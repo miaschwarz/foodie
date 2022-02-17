@@ -23,4 +23,8 @@ export class reviewsPage implements OnInit {
     this.router.navigateByUrl(`tabs/search`);
   }
 
+  goToMaps() {
+    this.router.navigateByUrl(`tabs/maps`);
+  }
+
 }

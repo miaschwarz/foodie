@@ -76,21 +76,18 @@ export class mapsPage {
       });
 
       google.maps.event.addListener(marker, 'click', () => {
-        infoWindow.setContent(`${restaurant.name}`);
+        let content = `${restaurant.name}'<button id='button-id-${restaurant.fragment}'>Click me</button>'`;
+        infoWindow.setContent(content);
         infoWindow.open(this.map, marker);
-        infoWindow.addListener('click', () => {
-          this.goToInfoPage(restaurant)
+        google.maps.event.addListener(infoWindow, 'domready', () => {
+          const button = document.getElementById(`button-id-${restaurant.fragment}`);
+          if (button) {
+            button.addEventListener("click", () => {
+              this.goToInfoPage(restaurant);
+            });
+          }
         });
       });
-
-      // google.maps.event.addListener(marker, 'click', () => {
-      //   infoWindow.setContent(`${restaurant.name}` 
-      //     + '<button onclick="gThis.goToInfoPage(restaurant)">Click me</button>');
-      //   infoWindow.open(this.map, marker);
-      //   infoWindow.addListener('click', function() {
-      //     gThis.goToInfoPage(restaurant)
-      //   });
-      // });
 
       google.maps.event.trigger(marker, 'click');
     
@@ -101,8 +98,7 @@ export class mapsPage {
 }
 
 goToInfoPage(restaurant: any) {
-  // console.log(this.restaurant.fragment);
-  this.router.navigateByUrl(`tabs/search`);
+  this.router.navigateByUrl(`info-page/${restaurant.fragment}`);
 }
   
 
