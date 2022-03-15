@@ -20,7 +20,7 @@ export class reviewsPage implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl(`tabs/search`);
+    this.router.navigateByUrl(`info-page/${this.restaurant.fragment}`);
   }
 
   goToMaps() {

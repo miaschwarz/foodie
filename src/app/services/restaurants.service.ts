@@ -1,28 +1,29 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Injectable, OnInit } from '@angular/core';
+import { race } from 'rxjs';
 
 @Injectable()
 export class RestaurantService {
-
-  resaurants = new Array();
 
   allRestaurants = [
     {
       "name": "Dishoom",
       "fragment": "dishoom",
-      "position": new google.maps.LatLng(51.525213293828294, -0.07678135988881027)
+      "position": new google.maps.LatLng(51.525213293828294, -0.07678135988881027),
+      "saved": false
     },
     {
       "name": "Flat Iron",
       "fragment": "flat-iron",
-      "position": new google.maps.LatLng(51.52509040543958, -0.08043040041963072)
+      "position": new google.maps.LatLng(51.52509040543958, -0.08043040041963072),
+      "saved": false
+
     },
     {
       "name": "The Blues Kitchen",
-      "fragment": "the-blue-kitchen",
-      "position": new google.maps.LatLng(51.52669085594079, -0.08009382392978215)
-
-      
+      "fragment": "the-blues-kitchen",
+      "position": new google.maps.LatLng(51.52669085594079, -0.08009382392978215),
+      "saved": true
     }
   ];
 
@@ -46,5 +47,10 @@ export class RestaurantService {
     }
     return null;
   }
+
+  toggleSaved(restaurant: any) {
+    restaurant.saved = !restaurant.saved;
+  }
+
 
 }

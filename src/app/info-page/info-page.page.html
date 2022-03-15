@@ -1,11 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{restaurant.name}}</ion-title>
+    <ion-title><ion-icon id="arrow" (click)="goToMap()" name="arrow-back-outline"></ion-icon>{{restaurant.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
   <ion-button class="review" color="light" size="medium" (click)="goToReview(restaurant)">Write Your Review!</ion-button>
+
+  <br>
+
+  <div class="collapsible-header" (click)="toggleSaved()">
+    <i class="material-icons" *ngIf="restaurant.saved"><ion-icon id="hearts" name="heart"></ion-icon></i>
+    <i class="material-icons" *ngIf="!restaurant.saved"><ion-icon id="hearts" name="heart-outline"></ion-icon></i></div>
+
+  <br>
+
+  <!-- fix to only drop pin on restaurant location -->
+  <ion-button (click)="showOnMap()">MAP</ion-button>
+
+
 
 </ion-content>

@@ -70,13 +70,14 @@ export class mapsPage {
       position: restaurant.position
       });
   
-      // let content = `${restaurant.name}` + '<button onclick="goToInfoPage()">Click me</button>';          
       let infoWindow = new google.maps.InfoWindow({
       content: ""
       });
 
+      // <button id='button-id-${restaurant.fragment}'><ion-icon name="arrow-forward-outline"></ion-icon></button>
+
       google.maps.event.addListener(marker, 'click', () => {
-        let content = `${restaurant.name}'<button id='button-id-${restaurant.fragment}'>Click me</button>'`;
+        let content = `${restaurant.name}<button id='button-id-${restaurant.fragment}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;
         infoWindow.setContent(content);
         infoWindow.open(this.map, marker);
         google.maps.event.addListener(infoWindow, 'domready', () => {
