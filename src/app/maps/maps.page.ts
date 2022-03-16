@@ -86,7 +86,8 @@ export class mapsPage {
       // <button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>
 
       google.maps.event.addListener(marker, 'click', () => {
-        let content = `${restaurant.name}<button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;
+        let content = `<button id='button-id-${restaurant.key}'>${restaurant.name}</button>`;
+        // <button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;
         infoWindow.setContent(content);
         infoWindow.open(this.map, marker);
         google.maps.event.addListener(infoWindow, 'domready', () => {
