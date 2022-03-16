@@ -15,12 +15,12 @@ export class reviewsPage implements OnInit {
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService) { }
 
   ngOnInit() {
-    let fragment = this.route.snapshot.paramMap.get('fragment');
-    this.restaurant = this.restaurantService.findRestaurantFromFragment(fragment);
+    let key = this.route.snapshot.paramMap.get('key');
+    this.restaurant = this.restaurantService.findRestaurantFromFragment(key);
   }
 
   goBack() {
-    this.router.navigateByUrl(`info-page/${this.restaurant.fragment}`);
+    this.router.navigateByUrl(`info-page/${this.restaurant.key}`);
   }
 
   goToMaps() {

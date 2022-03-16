@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./reviews/reviews.module').then( m => m.reviewsPageModule)
   },
   {
-    path: 'reviews/:fragment',
+    path: 'reviews/:key',
     loadChildren: () => import('./reviews/reviews.module').then( m => m.reviewsPageModule)
   },
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
     loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
   },
   {
-    path: 'info-page/:fragment',
+    path: 'info-page/:key',
     loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
   },
 ];

@@ -22,8 +22,12 @@ export class savedPage {
   }
 
   navTo(restaurant: any) {
-    console.log(restaurant.fragment);
-    this.router.navigateByUrl(`info-page/${restaurant.fragment}`);
+    console.log(restaurant.key);
+    this.router.navigateByUrl(`info-page/${restaurant.key}`);
   }
 
 }
+
+
+
+

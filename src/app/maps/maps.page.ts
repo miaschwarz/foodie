@@ -58,9 +58,18 @@ export class mapsPage {
   // }
 
   addRestaurantMarkers() {
-    for (let restaurant of this.restaurantService.getRestaurants()) {
-      this.addRestaurantMarker(restaurant);
-    }
+    this.restaurantService.getRestaurants().subscribe(
+      results => {
+        for (let restaurant of results.restaurants) {
+          restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
+          this.addRestaurantMarker(restaurant);
+        }
+      },
+      error => {
+        console.log(error);
+      });
+
+    
   }
 
   addRestaurantMarker(restaurant: any) {
@@ -74,14 +83,14 @@ export class mapsPage {
       content: ""
       });
 
-      // <button id='button-id-${restaurant.fragment}'><ion-icon name="arrow-forward-outline"></ion-icon></button>
+      // <button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>
 
       google.maps.event.addListener(marker, 'click', () => {
-        let content = `${restaurant.name}<button id='button-id-${restaurant.fragment}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;
+        let content = `${restaurant.name}<button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;
         infoWindow.setContent(content);
         infoWindow.open(this.map, marker);
         google.maps.event.addListener(infoWindow, 'domready', () => {
-          const button = document.getElementById(`button-id-${restaurant.fragment}`);
+          const button = document.getElementById(`button-id-${restaurant.key}`);
           if (button) {
             button.addEventListener("click", () => {
               this.goToInfoPage(restaurant);
@@ -99,7 +108,7 @@ export class mapsPage {
 }
 
 goToInfoPage(restaurant: any) {
-  this.router.navigateByUrl(`info-page/${restaurant.fragment}`);
+  this.router.navigateByUrl(`info-page/${restaurant.key}`);
 }
   
 

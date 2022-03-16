@@ -9,19 +9,25 @@ import { RestaurantService } from '../services/restaurants.service';
 })
 export class InfoPagePage implements OnInit {
 
-  fragment: string;
+  key: string;
   restaurant: any;
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService) { }
 
   ngOnInit() {
-    this.fragment = this.route.snapshot.paramMap.get('fragment');
-    this.restaurant = this.restaurantService.findRestaurantFromFragment(this.fragment);
+    this.key = this.route.snapshot.paramMap.get('key');
+    this.restaurantService.findRestaurantFromFragment(this.key).subscribe(
+      (results: any) => {
+        this.restaurant = results.restaurants[0];
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   goToReview(restaurant: any) {
-    console.log(restaurant.fragment);
-    this.router.navigateByUrl(`reviews/${restaurant.fragment}`);
+    console.log(restaurant.key);
+    this.router.navigateByUrl(`reviews/${restaurant.key}`);
   }
 
   goToMap() {

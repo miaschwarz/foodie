@@ -1,0 +1,11 @@
+Notes
+
+CREATE USER 'deploy'@'localhost' IDENTIFIED BY 'hGZbV+jb8Oh8';
+
+CREATE USER 'deploy'@'%' IDENTIFIED BY 'hGZbV+jb8Oh8';
+
+GRANT ALL ON *.* TO 'deploy'@'localhost';
+GRANT ALL ON *.* TO 'deploy'@'%';
+FLUSH PRIVILEGES;
+
+https://stackoverflow.com/questions/16287559/mysql-adding-user-for-remote-access

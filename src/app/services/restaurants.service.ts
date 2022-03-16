@@ -1,56 +1,66 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Injectable, OnInit } from '@angular/core';
-import { race } from 'rxjs';
+import { race, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+
 
 @Injectable()
 export class RestaurantService {
 
-  allRestaurants = [
-    {
-      "name": "Dishoom",
-      "fragment": "dishoom",
-      "position": new google.maps.LatLng(51.525213293828294, -0.07678135988881027),
-      "saved": false
-    },
-    {
-      "name": "Flat Iron",
-      "fragment": "flat-iron",
-      "position": new google.maps.LatLng(51.52509040543958, -0.08043040041963072),
-      "saved": false
+  constructor(private http: HttpClient) {
 
-    },
-    {
-      "name": "The Blues Kitchen",
-      "fragment": "the-blues-kitchen",
-      "position": new google.maps.LatLng(51.52669085594079, -0.08009382392978215),
-      "saved": true
-    }
-  ];
-
-  getRestaurants() {
-    return this.allRestaurants;
   }
 
-  formatFragments() {
-    for (let restaurant of this.allRestaurants) {
-      restaurant.fragment = restaurant.name.toLowerCase();
-      restaurant.fragment = restaurant.fragment.replace(" ", "-");
-      restaurant.fragment = restaurant.fragment.replace(" ", "-");
+  public getRestaurants(): any {
+
+    let url = 'http://localhost:3000/api/v1/restaurants';
+    let params = new HttpParams();
+    let options = { params: params }
+    return this.http.get(url, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+  }
+
+  formatFragments(restaurants: any) {
+    for (let restaurant of restaurants) {
+      restaurant.key = restaurant.name.toLowerCase();
+      restaurant.key = restaurant.key.replace(" ", "-");
+      restaurant.key = restaurant.key.replace(" ", "-");
     }
   }
 
-  findRestaurantFromFragment(fragment: string) {
-  for (let restaurant of this.allRestaurants) {
-      if (restaurant.fragment == fragment) {
-        return restaurant;
-      }
-    }
-    return null;
+  findRestaurantFromFragment(key: string) {
+    let url = `http://localhost:3000/api/v1/restaurants/search/${key}`;
+    let params = new HttpParams();
+    let options = { params: params }
+    return this.http.get(url, options)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   toggleSaved(restaurant: any) {
     restaurant.saved = !restaurant.saved;
   }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(
+      'Something bad happened; please try again later.');
+  };
 
 
 }
