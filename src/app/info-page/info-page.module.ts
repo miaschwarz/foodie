@@ -8,7 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { InfoPagePageRoutingModule } from './info-page-routing.module';
 
 import { InfoPagePage } from './info-page.page';
-import { searchPageRoutingModule } from '../search/search-routing.module';
+import { SearchPageRoutingModule } from '../search/search-routing.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RestaurantService } from '../services/restaurants.service';
 
@@ -20,7 +20,7 @@ import { RestaurantService } from '../services/restaurants.service';
     FormsModule,
     IonicModule,
     InfoPagePageRoutingModule,
-    searchPageRoutingModule, 
+    SearchPageRoutingModule, 
     Ng2SearchPipeModule
   ],
   providers: [RestaurantService],

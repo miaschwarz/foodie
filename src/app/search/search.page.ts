@@ -9,14 +9,28 @@ import { RestaurantService } from '../services/restaurants.service';
 })
 export class searchPage {
 
+  restaurants = [];
   searchTerm: string;
 
   constructor(public router: Router, public restaurantService: RestaurantService) {
+    this.loadRestaurants();
+  }
+
+  loadRestaurants() {
+    this.restaurantService.getRestaurants().subscribe(
+      results => {
+        this.restaurants = results.restaurants
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   navTo(restaurant: any) {
     console.log(restaurant.key);
     this.router.navigateByUrl(`info-page/${restaurant.key}`);
   }
+
+
 
 }

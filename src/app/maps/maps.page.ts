@@ -82,9 +82,6 @@ export class mapsPage {
       let infoWindow = new google.maps.InfoWindow({
       content: ""
       });
-
-      // <button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>
-
       google.maps.event.addListener(marker, 'click', () => {
         let content = `<button id='button-id-${restaurant.key}'>${restaurant.name}</button>`;
         // <button id='button-id-${restaurant.key}'><ion-icon name="arrow-forward-outline"></ion-icon></button>`;

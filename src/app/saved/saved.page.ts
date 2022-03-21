@@ -13,21 +13,17 @@ export class savedPage {
   searchTerm: string;
 
   constructor(public router: Router, public restaurantService: RestaurantService) {
-
-    for(let restaurant of restaurantService.getRestaurants()) {
+    for(let restaurant of this.restaurantService.getRestaurants()) {
       if(restaurant.saved) {
         this.savedRestaurants.push(restaurant);
       }
     }
   }
+  
 
   navTo(restaurant: any) {
-    console.log(restaurant.key);
-    this.router.navigateByUrl(`info-page/${restaurant.key}`);
+    console.log(restaurant.fragment);
+    this.router.navigateByUrl(`info-page/${restaurant.fragment}`);
   }
 
 }
-
-
-
-

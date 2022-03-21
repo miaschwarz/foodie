@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of restaurantService.getRestaurants() | filter:searchTerm">
+  <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of restaurants | filter:searchTerm">
     <ion-button style="color:grey" fill="clear">{{restaurant.name}}</ion-button>
   </ion-item>
 
