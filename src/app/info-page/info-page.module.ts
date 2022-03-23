@@ -11,6 +11,7 @@ import { InfoPagePage } from './info-page.page';
 import { SearchPageRoutingModule } from '../search/search-routing.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RestaurantService } from '../services/restaurants.service';
+import { UsersService } from '../services/users.service';
 
 
 @NgModule({
@@ -20,10 +21,10 @@ import { RestaurantService } from '../services/restaurants.service';
     FormsModule,
     IonicModule,
     InfoPagePageRoutingModule,
-    SearchPageRoutingModule, 
+    SearchPageRoutingModule,
     Ng2SearchPipeModule
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, UsersService],
   declarations: [InfoPagePage]
 })
-export class InfoPagePageModule {}
+export class InfoPagePageModule { }

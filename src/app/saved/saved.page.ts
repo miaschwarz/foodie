@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../services/restaurants.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-saved',
@@ -9,11 +10,10 @@ import { RestaurantService } from '../services/restaurants.service';
 })
 export class savedPage {
 
-  savedKeys = ['dishoom'];
   savedRestaurants = [];
   searchTerm: string;
 
-  constructor(public router: Router, public restaurantService: RestaurantService) {
+  constructor(public router: Router, public restaurantService: RestaurantService, public usersService: UsersService) {
     // for(let restaurant of this.restaurantService.getRestaurants()) {
     //   if(restaurant.saved) {
     //     this.savedRestaurants.push(restaurant);
@@ -24,20 +24,27 @@ export class savedPage {
 
   loadRestaurants() {
     this.restaurantService.getRestaurants().subscribe(
-      results => {
-        for(let key of this.savedKeys) {
-          for(let restaurant of results.restaurants) {
-            if(restaurant.key == key) {
-              this.savedRestaurants.push(restaurant);
+      restaurantResults => {
+        this.usersService.getUser(UsersService.email).subscribe(
+          results => {
+            let keys = results.user.saved.split(',');
+            for (let key of keys) {
+              for (let restaurant of restaurantResults.restaurants) {
+                if (restaurant.key == key) {
+                  this.savedRestaurants.push(restaurant);
+                }
+              }
             }
-          }
-        }
+          },
+          error => {
+            console.log(error);
+          });
       },
       error => {
         console.log(error);
       });
   }
-  
+
 
   navTo(restaurant: any) {
     console.log(restaurant.fragment);

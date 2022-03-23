@@ -43,21 +43,15 @@ export class mapsPage {
     this.restaurantService.getRestaurants().subscribe(
       results => {
         allRestaurants = results.restaurants;
-        this.addUser("schwarz.mia@gmail.com", restaurants, allRestaurants, true);
+        this.addUser(UsersService.email, restaurants, allRestaurants, true);
       },
       error => {
         console.log(error);
       });
-
-
-
-
-    //this.addRestaurantMarkers();
-    // this.addMarker();
   }
 
-  addUser(user: string, restaurants: any, allRestaurants: any, follow: boolean) {
-    this.usersService.getUser(user).subscribe(
+  addUser(email: string, restaurants: any, allRestaurants: any, follow: boolean) {
+    this.usersService.getUser(email).subscribe(
       results => {
 
         let keys = results.user.saved.split(',');
@@ -69,7 +63,7 @@ export class mapsPage {
             }
           }
         }
-        this.addRestaurantMarkers(restaurants);
+        this.addRestaurantMarkers(restaurants, results.user.name);
 
         if (follow) {
           let friends = results.user.friends.split(',');
@@ -102,28 +96,28 @@ export class mapsPage {
   //   });
   // }
 
-  addRestaurantMarkers(restaurants: any) {
+  addRestaurantMarkers(restaurants: any, name: string) {
 
     for (let restaurant of restaurants) {
       restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
-      this.addRestaurantMarker(restaurant);
+      this.addRestaurantMarker(restaurant, name);
     }
 
   }
 
 
-  addRestaurantMarker(restaurant: any) {
+  addRestaurantMarker(restaurant: any, name: string) {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: restaurant.position
+      position: restaurant.position,
     });
 
     let infoWindow = new google.maps.InfoWindow({
       content: ""
     });
     google.maps.event.addListener(marker, 'click', () => {
-      let content = `<button id='button-id-${restaurant.key}'>${restaurant.name}</button>`;
+      let content = `<p><button id='button-id-${restaurant.key}'>${name}</p>` + `<p>${restaurant.name}</button></p>`;
       infoWindow.setContent(content);
       infoWindow.open(this.map, marker);
       google.maps.event.addListener(infoWindow, 'domready', () => {

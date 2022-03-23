@@ -6,13 +6,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-searchbar placeholder="Search" [(ngModel)]="searchTerm" showCancelButton="never" animated>
-      </ion-searchbar>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-searchbar placeholder="Search" [(ngModel)]="searchTerm" showCancelButton="never" animated>
+  </ion-searchbar>
+
 
   <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of restaurants | filter:searchTerm">
     <ion-button style="color:grey" fill="clear">{{restaurant.name}}</ion-button>

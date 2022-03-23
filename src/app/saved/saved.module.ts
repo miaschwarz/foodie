@@ -10,6 +10,7 @@ import { RestaurantService } from '../services/restaurants.service';
 
 
 import { savedPageRoutingModule } from './saved-routing.module';
+import { UsersService } from '../services/users.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { savedPageRoutingModule } from './saved-routing.module';
     RouterModule.forChild([{ path: '', component: savedPage }]),
     savedPageRoutingModule,
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, UsersService],
   declarations: [savedPage]
 })
-export class savedPageModule {}
+export class savedPageModule { }

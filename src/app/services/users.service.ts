@@ -6,13 +6,15 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class UsersService {
-  
+
+  public static email = 'schwarz.mia@gmail.com';
+
   constructor(private http: HttpClient) {
 
   }
 
   public getUser(email: string): any {
-    let url = `http://localhost:3000/api/v1/users/search/${email}`;
+    let url = `http://localhost:3000/api/v1/users?email=${email}`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)
@@ -21,7 +23,19 @@ export class UsersService {
       );
   }
 
-  
+  public addRestaurant(email: string, restaurant: string): any {
+
+    let url = `http://localhost:3000/api/v1/users?email=${email}`;
+    let data = {
+      saved: restaurant
+    };
+    return this.http.put(url, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../services/restaurants.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-info-page',
@@ -12,7 +13,7 @@ export class InfoPagePage implements OnInit {
   key: string;
   restaurant: any;
 
-  constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService) { }
+  constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService, public usersService: UsersService) { }
 
   ngOnInit() {
     this.key = this.route.snapshot.paramMap.get('key');
@@ -39,7 +40,14 @@ export class InfoPagePage implements OnInit {
   }
 
   toggleSaved() {
-      this.restaurantService.toggleSaved(this.restaurant);
+    this.restaurantService.toggleSaved(this.restaurant);
+    this.usersService.addRestaurant(UsersService.email, this.restaurant.key).subscribe(
+      (results: any) => {
+        console.log(results);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 
