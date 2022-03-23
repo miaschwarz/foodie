@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { mapsPage } from './maps.page';
+import { favoritesPage } from './favorites.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { RestaurantService } from '../services/restaurants.service';
-import { UsersService } from '../services/users.service';
 
 
-import { mapsPageRoutingModule } from './maps-routing.module';
+import { favoritesPageRoutingModule } from './favorites-routing.module';
 
 @NgModule({
   imports: [
@@ -18,9 +17,9 @@ import { mapsPageRoutingModule } from './maps-routing.module';
     HttpClientModule,
     FormsModule,
     ExploreContainerComponentModule,
-    mapsPageRoutingModule
+    favoritesPageRoutingModule
   ],
-  providers: [RestaurantService, UsersService],
-  declarations: [mapsPage]
+  providers: [RestaurantService],
+  declarations: [favoritesPage]
 })
-export class mapsPageModule { }
+export class favoritesPageModule {}

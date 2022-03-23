@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="ion-text-center">
       Your Saved Restaurants
     </ion-title>
   </ion-toolbar>
@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of savedRestaurants | filter:searchTerm">
+  <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of savedRestaurants">
     <ion-button style="color:grey" fill="clear">{{restaurant.name}}</ion-button>
   </ion-item>
 

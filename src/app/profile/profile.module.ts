@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProfilePage } from './Profile.page';
+import { ProfilePage } from './profile.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { ProfilePageRoutingModule } from './Profile-routing.module';
+import { ProfilePageRoutingModule } from './profile-routing.module';
 
 @NgModule({
   imports: [
@@ -19,4 +19,4 @@ import { ProfilePageRoutingModule } from './Profile-routing.module';
   ],
   declarations: [ProfilePage]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }
