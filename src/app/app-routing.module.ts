@@ -8,24 +8,29 @@ const routes: Routes = [
   },
   {
     path: 'reviews',
-    loadChildren: () => import('./reviews/reviews.module').then( m => m.reviewsPageModule)
+    loadChildren: () => import('./reviews/reviews.module').then(m => m.reviewsPageModule)
   },
   {
     path: 'reviews/:key',
-    loadChildren: () => import('./reviews/reviews.module').then( m => m.reviewsPageModule)
+    loadChildren: () => import('./reviews/reviews.module').then(m => m.reviewsPageModule)
   },
   {
     path: 'info-page',
-    loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
+    loadChildren: () => import('./info-page/info-page.module').then(m => m.InfoPagePageModule)
   },
   {
     path: 'info-page/:key',
-    loadChildren: () => import('./info-page/info-page.module').then( m => m.InfoPagePageModule)
+    loadChildren: () => import('./info-page/info-page.module').then(m => m.InfoPagePageModule)
   },
   {
     path: 'favorites',
-    loadChildren: () => import('./favorites/favorites.module').then( m => m.favoritesPageModule)
+    loadChildren: () => import('./favorites/favorites.module').then(m => m.favoritesPageModule)
   },
+  {
+    path: 'friend',
+    loadChildren: () => import('./friend/friend.module').then(m => m.FriendPageModule)
+  }
+
 ];
 @NgModule({
   imports: [
@@ -33,4 +38,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

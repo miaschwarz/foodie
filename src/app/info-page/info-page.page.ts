@@ -58,7 +58,7 @@ export class InfoPagePage implements OnInit {
       saved = saved.replace(this.restaurant.key, '');
     } else {
       if (saved) {
-        saved = this.restaurant.key + ',';
+        saved += ',' + this.restaurant.key;
       } else {
         saved = this.restaurant.key;
       }
