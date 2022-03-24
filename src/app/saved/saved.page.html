@@ -7,8 +7,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-searchbar placeholder="Saved" [(ngModel)]="searchTerm" showCancelButton="never" animated>
-  </ion-searchbar> -->
+  <ion-searchbar placeholder="Saved" [(ngModel)]="searchTerm" showCancelButton="never" animated>
+  </ion-searchbar>
 
 
   <ion-item button (click)='navTo(restaurant)' *ngFor="let restaurant of savedRestaurants">

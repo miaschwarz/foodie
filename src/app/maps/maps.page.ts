@@ -97,12 +97,10 @@ export class mapsPage {
   // }
 
   addRestaurantMarkers(restaurants: any, name: string) {
-
     for (let restaurant of restaurants) {
       restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
       this.addRestaurantMarker(restaurant, name);
     }
-
   }
 
 
@@ -117,7 +115,7 @@ export class mapsPage {
       content: ""
     });
     google.maps.event.addListener(marker, 'click', () => {
-      let content = `<p><button id='button-id-${restaurant.key}'>${name}</p>` + `<p>${restaurant.name}</button></p>`;
+      let content = `<p><button id='button-id-${restaurant.key}'>${UsersService.email}</p>` + `<p>${restaurant.name}</button></p>`;
       infoWindow.setContent(content);
       infoWindow.open(this.map, marker);
       google.maps.event.addListener(infoWindow, 'domready', () => {

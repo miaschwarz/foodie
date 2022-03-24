@@ -23,8 +23,18 @@ export class UsersService {
       );
   }
 
-  public addRestaurant(email: string, restaurant: string): any {
+  public putSaved(email: string, saved: string): any {
+    let url = `http://localhost:3000/api/v1/users?email=${email}`;
+    let data = {
+      saved: saved
+    };
+    return this.http.put(url, data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
+  public removeRestaurant(email: string, restaurant: string): any {
     let url = `http://localhost:3000/api/v1/users?email=${email}`;
     let data = {
       saved: restaurant
@@ -33,9 +43,7 @@ export class UsersService {
       .pipe(
         catchError(this.handleError)
       );
-
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
