@@ -23,10 +23,22 @@ export class UsersService {
       );
   }
 
-  public putSaved(email: string, saved: string): any {
+  public getUsers(): any {
+    let url = 'http://localhost:3000/api/v1/users';
+    let params = new HttpParams();
+    let options = { params: params }
+    return this.http.get(url, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+  }
+
+  public putSaved(email: string, saved: string, friends: string): any {
     let url = `http://localhost:3000/api/v1/users?email=${email}`;
     let data = {
-      saved: saved
+      saved: saved,
+      friends: friends
     };
     return this.http.put(url, data)
       .pipe(
@@ -43,6 +55,10 @@ export class UsersService {
       .pipe(
         catchError(this.handleError)
       );
+  }
+
+  toggleAdd(user: any) {
+    user.friends = !user.friends;
   }
 
   private handleError(error: HttpErrorResponse) {

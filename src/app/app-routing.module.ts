@@ -27,8 +27,12 @@ const routes: Routes = [
     loadChildren: () => import('./favorites/favorites.module').then(m => m.favoritesPageModule)
   },
   {
-    path: 'friend',
+    path: 'friend/:email',
     loadChildren: () => import('./friend/friend.module').then(m => m.FriendPageModule)
+  },
+  {
+    path: 'search-friends',
+    loadChildren: () => import('./search-friends/search-friends.module').then(m => m.SearchFriendPageModule)
   }
 
 ];

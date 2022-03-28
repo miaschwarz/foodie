@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center" style="padding-top: 10px;">
+      Search
+    </ion-title>
+    <div class="ion-text-center">
+      <button (click)='goToRestaurantSearch()' size="medium" style="margin: 5px; padding: 5px;">Restaurants</button>
+      <button size="medium" style="margin: 5px; padding: 5px;">Friends</button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-searchbar placeholder="Search" [(ngModel)]="searchTerm" showCancelButton="never" animated>
+  </ion-searchbar>
+
+  <ion-item button (click)='navTo(user)' *ngFor="let user of users | filter:searchTerm">
+    <ion-button style="color:grey" fill="clear">{{user.email}}</ion-button>
+  </ion-item>
+
+
+
+</ion-content>

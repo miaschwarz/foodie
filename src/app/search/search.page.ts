@@ -31,6 +31,10 @@ export class searchPage {
     this.router.navigateByUrl(`info-page/${restaurant.key}`);
   }
 
+  goToFriendSearch() {
+    this.router.navigateByUrl(`search-friends`);
+  }
+
 
 
 }

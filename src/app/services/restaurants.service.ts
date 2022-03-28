@@ -1,7 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { race, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 
 
@@ -13,7 +13,6 @@ export class RestaurantService {
   }
 
   public getRestaurants(): any {
-
     let url = 'http://localhost:3000/api/v1/restaurants';
     let params = new HttpParams();
     let options = { params: params }

@@ -64,7 +64,7 @@ export class InfoPagePage implements OnInit {
       }
     }
 
-    this.usersService.putSaved(UsersService.email, saved).subscribe(
+    this.usersService.putSaved(UsersService.email, saved, this.user.friends).subscribe(
       (results: any) => {
         console.log(results);
         this.restaurantService.toggleSaved(this.restaurant);
@@ -72,9 +72,6 @@ export class InfoPagePage implements OnInit {
       error => {
         console.log(error);
       });
-
-
-
   }
 
 

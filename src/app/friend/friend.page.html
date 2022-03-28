@@ -7,7 +7,18 @@
 
 <ion-content>
 
-  <h1>MIA</h1>
+  <h1>{{email}}</h1>
+
+  <div class="collapsible-header" (click)="toggleAdd()">
+    <i class="material-icons" *ngIf="friend" style="margin: 25px" size="large">
+      <ion-icon name="person-add"></ion-icon>
+    </i>
+    <i class="material-icons" *ngIf="!friend" style="margin: 25px" size="large">
+      <ion-icon name="person-add-outline"></ion-icon>
+    </i>
+  </div>
+
+
 
 
 

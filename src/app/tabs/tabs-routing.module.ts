@@ -23,6 +23,10 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
       },
+      // {
+      //   path: 'search-friends',
+      //   loadChildren: () => import('../search-friends/search-friends.module').then(m => m.SearchFriendPageModule)
+      // },
       {
         path: '',
         redirectTo: '/tabs/maps',
@@ -40,4 +44,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }
