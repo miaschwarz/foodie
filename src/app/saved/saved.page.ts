@@ -14,11 +14,6 @@ export class savedPage {
   searchTerm: string;
 
   constructor(public router: Router, public restaurantService: RestaurantService, public usersService: UsersService) {
-    // for(let restaurant of this.restaurantService.getRestaurants()) {
-    //   if(restaurant.saved) {
-    //     this.savedRestaurants.push(restaurant);
-    //   }
-    // }
     this.loadRestaurants();
   }
 

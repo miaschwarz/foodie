@@ -9,3 +9,5 @@ GRANT ALL ON *.* TO 'deploy'@'%';
 FLUSH PRIVILEGES;
 
 https://stackoverflow.com/questions/16287559/mysql-adding-user-for-remote-access
+
+restart server: Node dist/server.js 

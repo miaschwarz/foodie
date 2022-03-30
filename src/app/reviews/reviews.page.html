@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center">
-      {{restaurant.name}} 
+    <ion-title class="ion-text-center" *ngIf="restaurant">
+      {{restaurant.name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button class="backbutton" color="light" size="small" (click)="goBack()">BACK</ion-button>
-  <h4><ion-input placeholder="Short Title"></ion-input></h4>
+  <ion-button class="backbutton" color="light" size="small" (click)="goBack(restaurant)">BACK</ion-button>
+  <h4>
+    <ion-input placeholder="Short Title"></ion-input>
+  </h4>
 
   <ion-list>
     <ion-item>
@@ -19,7 +21,10 @@
     </ion-item>
   </ion-list>
 
-  <ion-input  placeholder="Your review"></ion-input>
+  <!-- <ion-input type="number" value="5" min="1" max="9"></ion-input> -->
+
+
+  <ion-input placeholder="Your review"></ion-input>
 
   <ion-button class="donebutton" color="light" size="small" (click)="goToMaps()">DONE</ion-button>
 

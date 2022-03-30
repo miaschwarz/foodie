@@ -1,12 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="ion-text-center">
+    <ion-title class="ion-text-center" style="padding-top: 10px;">
       Maps
-      <title>Places Search Box</title>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
       <link rel="stylesheet" type="text/css" href="./style.css" />
       <script src="./index.js"></script>
     </ion-title>
+    <div class="ion-text-center">
+      <button size="medium" style="margin: 5px;">My Saved Places</button>
+      <button>
+        <ion-item>
+          <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" style="margin: 5px; padding: 5px;"
+            placeholder="Friends">
+            <ion-select-option button *ngFor="let user of users">
+              <ion-button style="color:grey" fill="clear">{{user.email}}</ion-button>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </button>
+    </div>
   </ion-toolbar>
 </ion-header>
 

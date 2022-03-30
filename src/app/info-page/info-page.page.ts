@@ -43,8 +43,8 @@ export class InfoPagePage implements OnInit {
     this.router.navigateByUrl(`reviews/${restaurant.key}`);
   }
 
-  goToMap() {
-    this.router.navigateByUrl(`tabs/maps`);
+  goToSearch() {
+    this.router.navigateByUrl(`tabs/search`);
   }
 
   showOnMap() {

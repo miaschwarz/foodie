@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 export class UsersService {
 
   public static email = 'schwarz.mia@gmail.com';
+  public static myname = 'mia';
 
   constructor(private http: HttpClient) {
 

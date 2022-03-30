@@ -22,7 +22,7 @@ import { UsersService } from '../services/users.service';
     IonicModule,
     SearchFriendPageRoutingModule,
     SearchPageRoutingModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   providers: [RestaurantService, UsersService],
   declarations: [SearchFriendPage]

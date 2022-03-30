@@ -10,17 +10,24 @@ import { RestaurantService } from '../services/restaurants.service';
 })
 export class reviewsPage implements OnInit {
 
+  key: string;
   restaurant: any;
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService) { }
 
   ngOnInit() {
-    let key = this.route.snapshot.paramMap.get('key');
-    this.restaurant = this.restaurantService.findRestaurantFromFragment(key);
+    this.key = this.route.snapshot.paramMap.get('key');
+    this.restaurantService.findRestaurantFromFragment(this.key).subscribe(
+      (results: any) => {
+        this.restaurant = results.restaurants[0];
+      },
+      error => {
+        console.log(error);
+      });
   }
 
-  goBack() {
-    this.router.navigateByUrl(`info-page/${this.restaurant.key}`);
+  goBack(restaurant: any) {
+    this.router.navigateByUrl(`info-page/${restaurant.key}`);
   }
 
   goToMaps() {

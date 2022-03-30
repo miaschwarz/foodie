@@ -14,6 +14,8 @@ let gThis;
 })
 export class mapsPage {
 
+  users = [];
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   searchTerm: string;
@@ -24,6 +26,7 @@ export class mapsPage {
       this.addMap(51.525333337531904, -0.07876743904137375);
     }, 1000);
 
+    this.getUsers();
   }
 
   addMap(lat, lng) {
@@ -79,23 +82,6 @@ export class mapsPage {
       });
   }
 
-  // addMarker(){
-  //   let marker = new google.maps.Marker({
-  //   map: this.map,
-  //   animation: google.maps.Animation.DROP,
-  //   position: this.map.getCenter()
-  //   });
-
-  //   let content = "<p>This is your current position !</p>";          
-  //   let infoWindow = new google.maps.InfoWindow({
-  //   content: content
-  //   });
-
-  //   google.maps.event.addListener(marker, 'click', () => {
-  //   infoWindow.open(this.map, marker);
-  //   });
-  // }
-
   addRestaurantMarkers(restaurants: any, name: string) {
     for (let restaurant of restaurants) {
       restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
@@ -115,7 +101,7 @@ export class mapsPage {
       content: ""
     });
     google.maps.event.addListener(marker, 'click', () => {
-      let content = `<p><button id='button-id-${restaurant.key}'>${UsersService.email}</p>` + `<p>${restaurant.name}</button></p>`;
+      let content = `<button id='button-id-${restaurant.key}'>${UsersService.myname}` + ' - ' + `${restaurant.name}</button>`;
       infoWindow.setContent(content);
       infoWindow.open(this.map, marker);
       google.maps.event.addListener(infoWindow, 'domready', () => {
@@ -138,6 +124,16 @@ export class mapsPage {
 
   goToInfoPage(restaurant: any) {
     this.router.navigateByUrl(`info-page/${restaurant.key}`);
+  }
+
+  getUsers() {
+    this.usersService.getUsers().subscribe(
+      results => {
+        this.users = results.users
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 
