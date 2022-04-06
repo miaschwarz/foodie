@@ -62,6 +62,16 @@ export class UsersService {
     user.friends = !user.friends;
   }
 
+  public getReviews(uid: number, rid: number): any {
+    let url = `http://localhost:3000/api/v1/reviews?uid=${uid}&rid=${rid}`;
+    let params = new HttpParams();
+    let options = { params: params }
+    return this.http.get(url, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

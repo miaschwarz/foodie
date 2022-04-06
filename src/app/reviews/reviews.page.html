@@ -8,24 +8,15 @@
 
 <ion-content>
   <ion-button class="backbutton" color="light" size="small" (click)="goBack(restaurant)">BACK</ion-button>
-  <h4>
-    <ion-input placeholder="Short Title"></ion-input>
-  </h4>
 
-  <ion-list>
-    <ion-item>
-      <ion-range min="0" max="5" step="1" snaps color="dark">
-        <ion-icon slot="start" size="small" color="black" name="star-outline"></ion-icon>
-        <ion-icon slot="end" color="black" name="star"></ion-icon>
-      </ion-range>
-    </ion-item>
-  </ion-list>
+  <div class="ion-text-center">
+    <ion-input type="number" value="5" min="0" max="5"></ion-input>
+  </div>
+  <div>
+    <ion-input placeholder="Your review"></ion-input>
+  </div>
 
-  <!-- <ion-input type="number" value="5" min="1" max="9"></ion-input> -->
-
-
-  <ion-input placeholder="Your review"></ion-input>
-
-  <ion-button class="donebutton" color="light" size="small" (click)="goToMaps()">DONE</ion-button>
+  <ion-button class="donebutton" color="light" size="small" (click)="goToMaps()">DONE
+  </ion-button>
 
 </ion-content>

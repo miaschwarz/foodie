@@ -14,6 +14,7 @@ export class InfoPagePage implements OnInit {
   key: string;
   restaurant: any;
   user: any;
+  reviews: any;
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService, public usersService: UsersService) { }
 
@@ -35,6 +36,8 @@ export class InfoPagePage implements OnInit {
       error => {
         console.log(error);
       });
+
+    this.getFriendIds();
 
   }
 
@@ -72,6 +75,27 @@ export class InfoPagePage implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  async getFriendIds() {
+
+    let results0 = <any>await this.restaurantService.findRestaurantFromFragment(this.key).toPromise();
+    this.restaurant = results0.restaurants[0];
+    console.log(this.restaurant);
+
+    let results1 = <any>await this.usersService.getUser(UsersService.email).toPromise();
+    let friends = results1.user.friends.split(',');
+    this.reviews = [];
+    for (let friend of friends) {
+      let results2 = <any>await this.usersService.getUser(friend).toPromise();
+
+      let results3 = <any>await this.usersService.getReviews(results2.user.id, this.restaurant.id).toPromise();
+      console.log(results3);
+
+      this.reviews = this.reviews.concat(results3.reviews);
+
+    }
+
   }
 
 

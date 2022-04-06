@@ -9,6 +9,7 @@ import { reviewsPageRoutingModule } from './reviews-routing.module';
 
 import { reviewsPage } from './reviews.page';
 import { RestaurantService } from '../services/restaurants.service';
+import { UsersService } from '../services/users.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { RestaurantService } from '../services/restaurants.service';
     IonicModule,
     reviewsPageRoutingModule
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, UsersService],
   declarations: [reviewsPage]
 })
-export class reviewsPageModule {}
+export class reviewsPageModule { }

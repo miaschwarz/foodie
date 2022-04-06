@@ -27,6 +27,15 @@
   <!-- fix to only drop pin on restaurant location -->
   <ion-button (click)="showOnMap()">MAP</ion-button>
 
+  <ion-item button *ngFor="let review of reviews">
+    <!-- <h6>
+      <ion-button style="color:grey" fill="clear">{{review.id}}</ion-button>
+    </h6> -->
+    <h5>
+      <ion-button style="color:grey" fill="clear">{{review.review}}</ion-button>
+    </h5>
+  </ion-item>
+
 
 
 </ion-content>

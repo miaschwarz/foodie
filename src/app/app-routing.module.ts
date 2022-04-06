@@ -23,10 +23,6 @@ const routes: Routes = [
     loadChildren: () => import('./info-page/info-page.module').then(m => m.InfoPagePageModule)
   },
   {
-    path: 'favorites',
-    loadChildren: () => import('./favorites/favorites.module').then(m => m.favoritesPageModule)
-  },
-  {
     path: 'friend/:email',
     loadChildren: () => import('./friend/friend.module').then(m => m.FriendPageModule)
   },
