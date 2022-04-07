@@ -1,39 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center" *ngIf="restaurant">
-      <ion-icon (click)="goToSearch()" name="arrow-back-outline"></ion-icon>{{restaurant.name}}
+    <ion-title class="ion-text-left" style="padding-left: 20px;">
+      <ion-icon (click)="goToSearch()" name="arrow-back-outline"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="restaurant">
-
-  <ion-button class="review" color="light" size="medium" (click)="goToReview(restaurant)">Write Your Review!
-  </ion-button>
-
-  <br>
-
-  <div class="collapsible-header" (click)="toggleSaved()">
-    <i class="material-icons" *ngIf="restaurant.saved">
-      <ion-icon id="hearts" name="heart"></ion-icon>
-    </i>
-    <i class="material-icons" *ngIf="!restaurant.saved">
-      <ion-icon id="hearts" name="heart-outline"></ion-icon>
-    </i>
+  <div class="row" class="ion-text-center" style="margin: 25px;">
+    <h1>{{restaurant.name}}
+      <i class="collapsible-header material-icons" (click)="toggleSaved()" *ngIf="restaurant.saved">
+        <ion-icon id="hearts" name="heart"></ion-icon>
+      </i>
+      <i class="material-icons" *ngIf="!restaurant.saved">
+        <ion-icon id="hearts" name="heart-outline"></ion-icon>
+      </i>
+    </h1>
   </div>
 
-  <br>
+  <div class="ion-text-center" style="margin: 50px;">
+    <ion-button color="light" size="medium" style="margin-right: 20px;" (click)="goToReview(restaurant)">Write Your
+      Review!
+    </ion-button>
+    <!-- fix to only drop pin on restaurant location -->
+    <ion-button (click)="showOnMap()">MAP</ion-button>
+  </div>
 
-  <!-- fix to only drop pin on restaurant location -->
-  <ion-button (click)="showOnMap()">MAP</ion-button>
 
-  <ion-item button *ngFor="let review of reviews">
-    <!-- <h6>
-      <ion-button style="color:grey" fill="clear">{{review.id}}</ion-button>
-    </h6> -->
-    <h5>
-      <ion-button style="color:grey" fill="clear">{{review.review}}</ion-button>
-    </h5>
+  <u>
+    <h3 class="ion-text-center">Your friends' reviews:</h3>
+  </u>
+  <ion-item *ngFor="let review of reviews" style="padding: 10px;">
+    <!-- <h6 style="color:grey; padding: 10px;" fill="clear">{{review.user_id}}</h6> -->
+    <h6 style="color:grey; padding: 10px;" fill="clear">{{review.email}}</h6>
+    <i style="color:grey; padding-right: 15px;" fill="clear">{{review.review}}</i>
+    <i style="color:grey; font-size: 10px;" fill="clear">Rating: {{review.rating}} </i>
   </ion-item>
 
 

@@ -14,6 +14,7 @@ export class InfoPagePage implements OnInit {
   key: string;
   restaurant: any;
   user: any;
+  users: any;
   reviews: any;
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService, public usersService: UsersService) { }
@@ -23,11 +24,17 @@ export class InfoPagePage implements OnInit {
     this.restaurantService.findRestaurantFromFragment(this.key).subscribe(
       (results: any) => {
         this.restaurant = results.restaurants[0];
-        this.usersService.getUser(UsersService.email).subscribe(
+        this.usersService.getUsers().subscribe(
           results => {
-            this.user = results.user;
-            let saved = this.user.saved && this.user.saved.indexOf(this.restaurant.key) != -1;
-            this.restaurant.saved = saved;
+            this.users = results.users;
+            for (let u of this.users) {
+              if (u.email == UsersService.email) {
+                this.user = u;
+                let saved = this.user.saved && this.user.saved.indexOf(this.restaurant.key) != -1;
+                this.restaurant.saved = saved;
+              }
+            }
+
           },
           error => {
             console.log(error);
@@ -91,6 +98,10 @@ export class InfoPagePage implements OnInit {
 
       let results3 = <any>await this.usersService.getReviews(results2.user.id, this.restaurant.id).toPromise();
       console.log(results3);
+
+      for (let r of results3.reviews) {
+        r.email = friend;
+      }
 
       this.reviews = this.reviews.concat(results3.reviews);
 

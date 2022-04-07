@@ -14,6 +14,16 @@ export class UsersService {
 
   }
 
+  public getUsers(): any {
+    let url = 'http://localhost:3000/api/v1/users';
+    let params = new HttpParams();
+    let options = { params: params }
+    return this.http.get(url, options)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   public getUser(email: string): any {
     let url = `http://localhost:3000/api/v1/users?email=${email}`;
     let params = new HttpParams();
@@ -24,16 +34,6 @@ export class UsersService {
       );
   }
 
-  public getUsers(): any {
-    let url = 'http://localhost:3000/api/v1/users';
-    let params = new HttpParams();
-    let options = { params: params }
-    return this.http.get(url, options)
-      .pipe(
-        catchError(this.handleError)
-      );
-
-  }
 
   public putSaved(email: string, saved: string, friends: string): any {
     let url = `http://localhost:3000/api/v1/users?email=${email}`;
