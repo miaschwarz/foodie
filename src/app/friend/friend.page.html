@@ -1,23 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center">
-    </ion-title>
+    <!-- <ion-title class="ion-text-center">
+    </ion-title> -->
+    <ion-icon (click)="goToFriendSearch()" name="arrow-back-outline"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-  <h1>{{email}}</h1>
-
-  <div class="collapsible-header" (click)="toggleAdd()">
-    <i class="material-icons" *ngIf="friend" style="margin: 25px" size="large">
-      <ion-icon name="person-add"></ion-icon>
-    </i>
-    <i class="material-icons" *ngIf="!friend" style="margin: 25px" size="large">
-      <ion-icon name="person-add-outline"></ion-icon>
-    </i>
+  <div class="row" class="ion-text-center" style="margin: 25px;">
+    <h1>{{email}}
+      <i class="collapsible-header material-icons" (click)="toggleAdd()" *ngIf="friend">
+        <ion-icon size="large" name="person-add" style="margin-left: 25px;"></ion-icon>
+      </i>
+      <i class="material-icons" *ngIf="!friend">
+        <ion-icon size="large" name="person-add-outline" style="margin-left: 25px;"></ion-icon>
+      </i>
+    </h1>
   </div>
-
 
 
 

@@ -53,5 +53,9 @@ export class FriendPage implements OnInit {
       });
   }
 
+  goToFriendSearch() {
+    this.router.navigateByUrl(`tabs/search-friends`);
+  }
+
 
 }
