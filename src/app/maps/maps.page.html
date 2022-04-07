@@ -8,16 +8,6 @@
     </ion-title>
     <div class="ion-text-center">
       <button size="medium" style="margin: 5px;">My Saved Places</button>
-      <button>
-        <ion-item>
-          <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" style="margin: 5px; padding: 5px;"
-            placeholder="Friends">
-            <ion-select-option button *ngFor="let user of users">
-              <ion-button style="color:grey" fill="clear">{{user.email}}</ion-button>
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </button>
     </div>
   </ion-toolbar>
 </ion-header>

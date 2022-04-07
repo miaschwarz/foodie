@@ -9,6 +9,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { ProfilePageRoutingModule } from './profile-routing.module';
 import { UsersService } from '../services/users.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RestaurantService } from '../services/restaurants.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule.forChild([{ path: '', component: ProfilePage }]),
     ProfilePageRoutingModule,
   ],
-  providers: [UsersService],
+  providers: [UsersService, RestaurantService],
   declarations: [ProfilePage]
 })
 export class ProfilePageModule { }

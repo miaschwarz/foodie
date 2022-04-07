@@ -56,9 +56,7 @@ export class mapsPage {
   addUser(email: string, restaurants: any, allRestaurants: any, follow: boolean) {
     this.usersService.getUser(email).subscribe(
       results => {
-
         let keys = results.user.saved.split(',');
-
         for (let key of keys) {
           for (let restaurant of allRestaurants) {
             if (restaurant.key == key) {
@@ -74,8 +72,6 @@ export class mapsPage {
             this.addUser(friend, restaurants, allRestaurants, false)
           }
         }
-
-
       },
       error => {
         console.log(error);
