@@ -8,12 +8,16 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class RestaurantService {
 
+  // serverUrl = 'http://localhost:3000';
+  public static serverUrl = 'http://207.154.199.178:3000';
+
   constructor(private http: HttpClient) {
+
 
   }
 
   public getRestaurants(): any {
-    let url = 'http://localhost:3000/api/v1/restaurants';
+    let url = `${RestaurantService.serverUrl}/api/v1/restaurants`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)
@@ -32,7 +36,7 @@ export class RestaurantService {
   }
 
   findRestaurantFromFragment(key: string) {
-    let url = `http://localhost:3000/api/v1/restaurants/search/${key}`;
+    let url = `${RestaurantService.serverUrl}/api/v1/restaurants/search/${key}`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)

@@ -3,6 +3,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { RestaurantService } from './restaurants.service';
 
 @Injectable()
 export class UsersService {
@@ -10,12 +11,13 @@ export class UsersService {
   public static email = 'schwarz.mia@gmail.com';
   public static myname = 'mia';
 
+
   constructor(private http: HttpClient) {
 
   }
 
   public getUsers(): any {
-    let url = 'http://localhost:3000/api/v1/users';
+    let url = `${RestaurantService.serverUrl}/api/v1/users`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)
@@ -25,7 +27,7 @@ export class UsersService {
   }
 
   public getUser(email: string): any {
-    let url = `http://localhost:3000/api/v1/users?email=${email}`;
+    let url = `${RestaurantService.serverUrl}/api/v1/users?email=${email}`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)
@@ -36,7 +38,7 @@ export class UsersService {
 
 
   public putSaved(email: string, saved: string, friends: string): any {
-    let url = `http://localhost:3000/api/v1/users?email=${email}`;
+    let url = `${RestaurantService.serverUrl}/api/v1/users?email=${email}`;
     let data = {
       saved: saved,
       friends: friends
@@ -48,7 +50,7 @@ export class UsersService {
   }
 
   public removeRestaurant(email: string, restaurant: string): any {
-    let url = `http://localhost:3000/api/v1/users?email=${email}`;
+    let url = `${RestaurantService.serverUrl}/api/v1/users?email=${email}`;
     let data = {
       saved: restaurant
     };
@@ -63,7 +65,7 @@ export class UsersService {
   }
 
   public getReviews(uid: number, rid: number): any {
-    let url = `http://localhost:3000/api/v1/reviews?uid=${uid}&rid=${rid}`;
+    let url = `${RestaurantService.serverUrl}/api/v1/reviews?uid=${uid}&rid=${rid}`;
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)
