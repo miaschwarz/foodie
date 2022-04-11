@@ -16,6 +16,7 @@ export class InfoPagePage implements OnInit {
   user: any;
   users: any;
   reviews: any;
+  reviewed = false;
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService, public usersService: UsersService) { }
 
@@ -91,23 +92,33 @@ export class InfoPagePage implements OnInit {
     console.log(this.restaurant);
 
     let results1 = <any>await this.usersService.getUser(UsersService.email).toPromise();
+
+    if (results1 && results1.user) {
+      let results1a = <any>await this.usersService.getReviews(results1.user.id, this.restaurant.id).toPromise();
+      console.log(results1a);
+
+      this.reviewed = results1a && results1a.reviews && results1a.reviews.length > 0;
+
+    }
+
     let friends = results1.user.friends.split(',');
     this.reviews = [];
     for (let friend of friends) {
       let results2 = <any>await this.usersService.getUser(friend).toPromise();
 
-      let results3 = <any>await this.usersService.getReviews(results2.user.id, this.restaurant.id).toPromise();
-      console.log(results3);
+      if (results2 && results2.user) {
+        let results3 = <any>await this.usersService.getReviews(results2.user.id, this.restaurant.id).toPromise();
+        console.log(results3);
 
-      for (let r of results3.reviews) {
-        r.email = friend;
+        for (let r of results3.reviews) {
+          r.email = friend;
+          if (r.id == results1.user.id) {
+            this.reviewed = true;
+          }
+        }
+
+        this.reviews = this.reviews.concat(results3.reviews);
       }
-
-      this.reviews = this.reviews.concat(results3.reviews);
-
     }
-
   }
-
-
 }

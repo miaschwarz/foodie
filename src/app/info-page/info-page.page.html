@@ -19,7 +19,8 @@
   </div>
 
   <div class="ion-text-center" style="margin: 50px;">
-    <ion-button color="light" size="medium" style="margin-right: 20px;" (click)="goToReview(restaurant)">Write Your
+    <ion-button *ngIf="!reviewed" color="light" size="medium" style="margin-right: 20px;"
+      (click)="goToReview(restaurant)">Write Your
       Review!
     </ion-button>
     <!-- fix to only drop pin on restaurant location -->
