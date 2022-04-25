@@ -12,14 +12,17 @@ import { UsersService } from '../services/users.service';
 export class FriendPage implements OnInit {
 
   email: string;
+  name: string;
   restaurant: any;
   user: any;
   friend: any;
+  visitedRestaurants = [];
 
   constructor(public router: Router, public route: ActivatedRoute, public restaurantService: RestaurantService, public usersService: UsersService) { }
 
   ngOnInit() {
     this.email = this.route.snapshot.paramMap.get('email');
+    // this.name = this.route.snapshot.paramMap.get('name');
     this.usersService.getUser(UsersService.email).subscribe(
       results => {
         this.user = results.user;
@@ -32,16 +35,21 @@ export class FriendPage implements OnInit {
 
   toggleAdd() {
     let friends = this.user.friends;
-    if (this.user.friends) {
-      friends = friends.replace(',' + this.email, '');
-      friends = friends.replace(this.email, '');
-    } else {
+    if (!friends) {
+      friends = '';
+    }
+
+    if (friends.indexOf(this.email) == -1) {
       if (friends) {
         friends += ',' + this.email;
       } else {
         friends = this.email;
       }
+    } else {
+      friends = friends.replace(',' + this.email, '');
+      friends = friends.replace(this.email, '');
     }
+
     this.user.friends = friends;
     this.usersService.putSaved(UsersService.email, this.user.saved, this.user.friends).subscribe(
       (results: any) => {
@@ -55,6 +63,26 @@ export class FriendPage implements OnInit {
 
   goToFriendSearch() {
     this.router.navigateByUrl(`tabs/search-friends`);
+  }
+
+  async listReviews() {
+    this.visitedRestaurants = [];
+    let userR = <any>await this.usersService.getUser(UsersService.email).toPromise();
+    let reviewsR = <any>await this.usersService.getReviews(userR.user.id).toPromise();
+    let restaurantsR = <any>await this.restaurantService.getRestaurants().toPromise();
+    for (let review of reviewsR.reviews) {
+      for (let restaurant of restaurantsR.restaurants) {
+        if (review.restaurant_id == restaurant.id) {
+          this.visitedRestaurants.push({
+            name: restaurant.name,
+            rating: review.rating,
+            review: review.review,
+            key: restaurant.key
+          });
+        }
+      }
+      console.log(this.visitedRestaurants);
+    }
   }
 
 

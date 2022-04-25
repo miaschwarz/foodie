@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'search-friends',
     loadChildren: () => import('./search-friends/search-friends.module').then(m => m.SearchFriendPageModule)
+  },
+  {
+    path: 'visited',
+    loadChildren: () => import('./visited/visited.module').then(m => m.VisitedPageModule)
   }
 
 ];

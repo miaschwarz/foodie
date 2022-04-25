@@ -15,6 +15,10 @@ let gThis;
 export class mapsPage {
 
   users = [];
+  key: string;
+  reviews: any;
+  reviewed = false;
+  restaurant: any;
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -41,49 +45,64 @@ export class mapsPage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     let allRestaurants = [];
-    let restaurants = [];
 
     this.restaurantService.getRestaurants().subscribe(
       results => {
         allRestaurants = results.restaurants;
-        this.addUser(UsersService.email, restaurants, allRestaurants, true);
+        this.addUsersFriends(UsersService.email, allRestaurants);
       },
       error => {
         console.log(error);
       });
   }
 
-  addUser(email: string, restaurants: any, allRestaurants: any, follow: boolean) {
-    this.usersService.getUser(email).subscribe(
-      results => {
-        let keys = results.user.saved.split(',');
-        for (let key of keys) {
-          for (let restaurant of allRestaurants) {
-            if (restaurant.key == key) {
-              restaurants.push(restaurant);
-            }
-          }
-        }
-        this.addRestaurantMarkers(restaurants, results.user.name);
-
-        if (follow) {
-          let friends = results.user.friends.split(',');
-          for (let friend of friends) {
-            this.addUser(friend, restaurants, allRestaurants, false)
-          }
-        }
-      },
-      error => {
-        console.log(error);
-      });
+  async addUsersFriends(email: string, allRestaurants: any) {
+    await this.addUsersFriendsImpl(email, allRestaurants)
   }
 
-  addRestaurantMarkers(restaurants: any, name: string) {
-    for (let restaurant of restaurants) {
-      restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
-      this.addRestaurantMarker(restaurant, name);
+  async addUsersFriendsImpl(email: string, allRestaurants: any) {
+
+    let userResults = await this.usersService.getUser(email).toPromise();
+    let friends = userResults.user.friends.split(',');
+    for (let friend of friends) {
+      let friendResult = await this.usersService.getUser(friend).toPromise();
+      let friendReviews = <any>await this.usersService.getReviews(friendResult.user.id, null).toPromise();
+      for (let r of friendReviews.reviews) {
+        for (let restaurant of allRestaurants) {
+          if (r.restaurant_id == restaurant.id) {
+            restaurant.position = new google.maps.LatLng(restaurant.lat, restaurant.lng);
+            this.addRestaurantMarker(restaurant, friendResult.user.name);
+          }
+        }
+      }
     }
   }
+
+  async addRestaurantMarkers(restaurants: any, name: string) {
+
+    let results0 = <any>await this.restaurantService.findRestaurantFromFragment(this.key).toPromise();
+    this.restaurant = results0.restaurants[0];
+    console.log(this.restaurant);
+
+    let results1 = <any>await this.usersService.getUser(UsersService.email).toPromise();
+
+    this.reviews = [];
+    let friends = results1.user.friends.split(',');
+    for (let friend of friends) {
+      let results2 = <any>await this.usersService.getUser(friend).toPromise();
+
+      if (results2 && results2.user) {
+        let results3 = <any>await this.usersService.getReviews(results2.user.id, null).toPromise();
+
+        for (let r of results3.reviews) {
+          r.email = friend;
+
+        }
+        this.reviews = this.reviews.concat(results3.reviews);
+      }
+    }
+  }
+
 
 
   addRestaurantMarker(restaurant: any, name: string) {
@@ -97,7 +116,7 @@ export class mapsPage {
       content: ""
     });
     google.maps.event.addListener(marker, 'click', () => {
-      let content = `<button id='button-id-${restaurant.key}'>${UsersService.myname}` + ' - ' + `${restaurant.name}</button>`;
+      let content = `<button id='button-id-${restaurant.key}'>` + `${restaurant.name}</button>`;
       infoWindow.setContent(content);
       infoWindow.open(this.map, marker);
       google.maps.event.addListener(infoWindow, 'domready', () => {

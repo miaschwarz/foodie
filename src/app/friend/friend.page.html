@@ -8,17 +8,21 @@
 
 <ion-content>
   <div class="row" class="ion-text-center" style="margin: 25px;">
-    <h1>{{email}} </h1>
+    <h1>{{name}}</h1>
+    <h1 style="margin-top: 25x;">{{email}} </h1>
 
-    <i class="collapsible-header material-icons" (click)="toggleAdd()" *ngIf="friend">
-      <ion-icon size="large" name="person-add" style="margin-left: 25px;"></ion-icon>
-    </i>
-    <i class="material-icons" *ngIf="!friend">
-      <ion-icon size="large" name="person-add-outline" style="margin-left: 25px;"></ion-icon>
-    </i>
+    <div class="collapsible-header" (click)="toggleAdd()">
+      <i class="material-icons" *ngIf="friend" style="margin: 25px">
+        <ion-icon name="person-add" size="large"></ion-icon>
+      </i>
+      <i class="material-icons" *ngIf="!friend" style="margin: 25px">
+        <ion-icon name="person-add-outline" size="large"></ion-icon>
+      </i>
+    </div>
   </div>
 
-
-
+  <ion-item button (click)='navTo(visited)' *ngFor="let visited of visitedRestaurants">
+    <ion-button style="color:grey" fill="clear">{{visited.name}}</ion-button>
+  </ion-item>
 
 </ion-content>

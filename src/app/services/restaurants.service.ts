@@ -8,8 +8,8 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class RestaurantService {
 
-  // serverUrl = 'http://localhost:3000';
-  public static serverUrl = 'http://207.154.199.178:3000';
+  // public static serverUrl = 'http://localhost:3000';
+  public static serverUrl = 'https://api.foodieamies.com';
 
   constructor(private http: HttpClient) {
 

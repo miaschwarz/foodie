@@ -22,6 +22,10 @@ export class ProfilePage {
     this.router.navigateByUrl(`tabs/saved`);
   }
 
+  goToVisited() {
+    this.router.navigateByUrl(`visited`);
+  }
+
   getUsers() {
     this.usersService.getUsers().subscribe(
       results => {

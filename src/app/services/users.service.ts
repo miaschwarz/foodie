@@ -11,7 +11,6 @@ export class UsersService {
   public static email = 'schwarz.mia@gmail.com';
   public static myname = 'mia';
 
-
   constructor(private http: HttpClient) {
 
   }
@@ -64,8 +63,11 @@ export class UsersService {
     user.friends = !user.friends;
   }
 
-  public getReviews(uid: number, rid: number): any {
-    let url = `${RestaurantService.serverUrl}/api/v1/reviews?uid=${uid}&rid=${rid}`;
+  public getReviews(uid: number, rid?: number): any {
+    let url = `${RestaurantService.serverUrl}/api/v1/reviews?uid=${uid}`;
+    if (rid) {
+      url += `&rid=${rid}`;
+    }
     let params = new HttpParams();
     let options = { params: params }
     return this.http.get(url, options)

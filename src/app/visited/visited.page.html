@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Your Visited Restaurants
+    </ion-title>
+    <ion-icon (click)="goBack()" name="arrow-back-outline"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-item *ngFor="let visited of visitedRestaurants" style="padding: 10px;">
+    <button (click)='navTo(restaurant)'> mia
+    </button>
+    <i style="color:grey; padding-right: 15px;" fill="clear">{{visited.name}}</i>
+    <i style="color:grey; padding-right: 15px;" fill="clear">{{visited.rating}}</i>
+    <i style="color:grey; font-size: 10px;" fill="clear">Rating: {{visited.review}} </i>
+  </ion-item> -->
+  <ion-item button (click)='navTo(visited)' *ngFor="let visited of visitedRestaurants">
+    <ion-button style="color:grey" fill="clear">{{visited.name}}</ion-button>
+    <i style="color:grey; padding-right: 15px;" fill="clear">{{visited.rating}}</i>
+    <i style="color:grey; font-size: 10px;" fill="clear">Rating: {{visited.review}} </i>
+  </ion-item>
+
+</ion-content>

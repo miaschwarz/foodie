@@ -35,7 +35,6 @@ export class InfoPagePage implements OnInit {
                 this.restaurant.saved = saved;
               }
             }
-
           },
           error => {
             console.log(error);
